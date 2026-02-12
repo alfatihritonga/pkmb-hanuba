@@ -1,4 +1,14 @@
 <x-layouts.admin>
+    @php
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Master Data'],
+            ['label' => 'Tingkat Kelas', 'url' => route('admin.grades.index')],
+            ['label' => 'Edit'],
+        ];
+    @endphp
+    <x-ui.breadcrumbs :items="$breadcrumbs" />
+
     <h1 class="text-xl font-semibold mb-6">Edit Tingkat Kelas</h1>
 
     <form method="POST"

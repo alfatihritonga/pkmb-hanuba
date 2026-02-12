@@ -104,6 +104,15 @@
                     <span class="is-drawer-close:hidden">Monitoring Nilai</span>
                 </a>
             </li>
+
+            <li>
+                <a href="{{ route('admin.attendances.index') }}" class="{{ Route::is('admin.attendances.*') ? 'menu-active' : '' }} is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Monitoring Absensi">
+                    <svg class="w-[18px] h-[18px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6V4m0 2a2 2 0 1 0 0 4m0-4a2 2 0 0 1 0 4m0 0a2 2 0 1 0 0 4m0-4a2 2 0 0 1 0 4m0 4v-2m0 2a2 2 0 1 0 0-4m0 4a2 2 0 0 1 0-4m6-1a9 9 0 1 1-12 0"/>
+                    </svg>
+                    <span class="is-drawer-close:hidden">Monitoring Absensi</span>
+                </a>
+            </li>
             
         </ul>
     </div>

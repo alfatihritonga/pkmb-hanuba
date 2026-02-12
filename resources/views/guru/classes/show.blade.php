@@ -1,4 +1,13 @@
 <x-layouts.guru>
+    @php
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => route('guru.dashboard')],
+            ['label' => 'Kelas Saya', 'url' => route('guru.classes.index')],
+            ['label' => $classroom->grade->name . ' ' . $classroom->name],
+        ];
+    @endphp
+    <x-ui.breadcrumbs :items="$breadcrumbs" />
+
     {{-- HEADER --}}
     <div class="mb-6">
         <h1 class="text-xl font-semibold">
@@ -26,15 +35,20 @@
                     Mata Pelajaran: {{ $schedule->subject->name }}
                 </h3>
                 
-                <div class="flex gap-2 mt-3">
+                <div class="flex flex-wrap gap-2 mt-3">
                     <a href="{{ route('guru.scores.create', [$classroom, $schedule->subject]) }}"
                         class="btn btn-sm btn-primary">
                         Input Nilai
                     </a>
-                    
+
                     <a href="{{ route('guru.scores.recap', [$classroom, $schedule->subject]) }}"
                         class="btn btn-sm btn-outline">
                         Rekap Nilai
+                    </a>
+
+                    <a href="{{ route('guru.attendances.index', [$classroom, $schedule]) }}"
+                        class="btn btn-sm btn-ghost">
+                        Absensi
                     </a>
                 </div>
             </div>

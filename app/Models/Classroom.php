@@ -38,6 +38,11 @@ class Classroom extends Model
         return $this->hasMany(Schedule::class);
     }
 
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
     public function students()
     {
         return $this->belongsToMany(Student::class, 'class_assignments');

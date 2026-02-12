@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AcademicYearController;
+use App\Http\Controllers\Admin\AttendanceController as AdminAttendanceController;
 use App\Http\Controllers\Admin\ClassAssignmentController;
 use App\Http\Controllers\Admin\ClassroomController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Guru\AttendanceController as GuruAttendanceController;
 use App\Http\Controllers\Guru\ClassController;
 use App\Http\Controllers\Guru\DashboardController as GuruDashboardController;
 use App\Http\Controllers\Guru\ScoreController;
@@ -76,6 +78,24 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/scores/classroom/{classroom}/{subject}', [ScoreRecapController::class, 'detail'])
             ->name('scores.detail');
 
+        Route::get('/attendances', [AdminAttendanceController::class, 'index'])
+            ->name('attendances.index');
+
+        Route::get('/attendances/classroom/{classroom}', [AdminAttendanceController::class, 'show'])
+            ->name('attendances.show');
+
+        Route::get('/attendances/classroom/{classroom}/schedule/{schedule}/{date}', [AdminAttendanceController::class, 'detail'])
+            ->where('date', '\\d{4}-\\d{2}-\\d{2}')
+            ->name('attendances.detail');
+
+        Route::post('/attendances/classroom/{classroom}/schedule/{schedule}/{date}/validate', [AdminAttendanceController::class, 'validateAttendance'])
+            ->where('date', '\\d{4}-\\d{2}-\\d{2}')
+            ->name('attendances.validate');
+
+        Route::delete('/attendances/classroom/{classroom}/schedule/{schedule}/{date}/validate', [AdminAttendanceController::class, 'revokeValidation'])
+            ->where('date', '\\d{4}-\\d{2}-\\d{2}')
+            ->name('attendances.revoke');
+
         Route::resource('schedules', ScheduleController::class);
         Route::resource('users', UserController::class);
     });
@@ -102,6 +122,23 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/classes/{classroom}/scores/{subject}/recap', [GuruScoreRecapController::class, 'index'])
             ->name('scores.recap');
+
+        Route::prefix('/classes/{classroom}/schedules/{schedule}/attendances')
+            ->name('attendances.')
+            ->group(function () {
+                Route::get('/', [GuruAttendanceController::class, 'index'])
+                    ->name('index');
+                Route::get('/create', [GuruAttendanceController::class, 'create'])
+                    ->name('create');
+                Route::post('/', [GuruAttendanceController::class, 'store'])
+                    ->name('store');
+                Route::get('/{date}/edit', [GuruAttendanceController::class, 'edit'])
+                    ->where('date', '\\d{4}-\\d{2}-\\d{2}')
+                    ->name('edit');
+                Route::put('/{date}', [GuruAttendanceController::class, 'update'])
+                    ->where('date', '\\d{4}-\\d{2}-\\d{2}')
+                    ->name('update');
+            });
     });
 });
 

@@ -10,7 +10,7 @@ class SubjectController extends Controller
 {
     public function index()
     {
-        $subjects = Subject::orderBy('name')->get();
+        $subjects = Subject::orderBy('name')->paginate(10);
 
         return view('admin.subjects.index', compact('subjects'));
     }

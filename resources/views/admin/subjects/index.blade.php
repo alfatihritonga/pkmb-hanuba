@@ -1,4 +1,13 @@
 <x-layouts.admin>
+    @php
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Master Data'],
+            ['label' => 'Mata Pelajaran'],
+        ];
+    @endphp
+    <x-ui.breadcrumbs :items="$breadcrumbs" />
+
     <div class="flex flex-wrap justify-between mb-4">
         <div class="mb-4 md:mb-0">
             <h1 class="text-xl sm:text-2xl font-bold">Mata Pelajaran</h1>
@@ -36,7 +45,7 @@
             <tbody>
                 @foreach ($subjects as $subject)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $loop->iteration + $subjects->firstItem() - 1 }}</td>
                     <td class="font-mono">{{ $subject->code }}</td>
                     <td>{{ $subject->name }}</td>
                     <td>
@@ -66,5 +75,9 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+
+    <div class="mt-4">
+        {{ $subjects->links() }}
     </div>
 </x-layouts.admin>

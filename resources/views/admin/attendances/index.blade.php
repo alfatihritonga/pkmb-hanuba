@@ -3,17 +3,17 @@
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
             ['label' => 'Monitoring'],
-            ['label' => 'Monitoring Nilai'],
+            ['label' => 'Monitoring Absensi'],
         ];
     @endphp
     <x-ui.breadcrumbs :items="$breadcrumbs" />
 
     <div class="flex flex-wrap justify-between mb-4">
         <div class="mb-4 md:mb-0">
-            <h1 class="text-xl sm:text-2xl font-bold">Monitoring Nilai</h1>
-            <p class="text-sm font-normal opacity-60">Monitoring nilai siswa berdasarkan tahun akademik</p>
+            <h1 class="text-xl sm:text-2xl font-bold">Monitoring Absensi</h1>
+            <p class="text-sm font-normal opacity-60">Monitoring absensi siswa berdasarkan tahun akademik</p>
         </div>
-        
+
         <div class="self-end">
             <form action="" method="get">
                 <label class="select select-sm">
@@ -34,7 +34,15 @@
             </form>
         </div>
     </div>
-    
+
+    @if (session('success'))
+        <div class="alert alert-success mb-4">{{ session('success') }}</div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-error mb-4">{{ session('error') }}</div>
+    @endif
+
     <div class="bg-base-100 rounded-lg shadow overflow-x-auto">
         <table class="table table-zebra">
             <thead>
@@ -50,7 +58,7 @@
                     <td>{{ $classroom->grade->name }}</td>
                     <td>{{ $classroom->name }}</td>
                     <td class="text-right">
-                        <a href="{{ route('admin.scores.show', $classroom) }}?academic_year_id={{ $activeYear->id }}" class="btn btn-sm btn-outline">
+                        <a href="{{ route('admin.attendances.show', $classroom) }}?academic_year_id={{ $activeYear->id }}" class="btn btn-sm btn-outline">
                             Lihat Rekap
                             <svg class="w-[18px] h-[18px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 12H5m14 0-4 4m4-4-4-4"/>

@@ -1,4 +1,14 @@
 <x-layouts.guru>
+    @php
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => route('guru.dashboard')],
+            ['label' => 'Kelas Saya', 'url' => route('guru.classes.index')],
+            ['label' => $classroom->grade->name . ' ' . $classroom->name, 'url' => route('guru.classes.show', $classroom)],
+            ['label' => 'Rekap Nilai'],
+        ];
+    @endphp
+    <x-ui.breadcrumbs :items="$breadcrumbs" />
+
     {{-- HEADER --}}
     <div class="mb-6">
         <h1 class="text-xl font-semibold">

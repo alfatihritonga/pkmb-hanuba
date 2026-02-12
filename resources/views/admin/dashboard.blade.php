@@ -1,6 +1,13 @@
 <x-layouts.admin>
     <div class="space-y-6">
 
+        @php
+            $breadcrumbs = [
+                ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ];
+        @endphp
+        <x-ui.breadcrumbs :items="$breadcrumbs" />
+
         {{-- Header --}}
         <div>
             <h1 class="text-xl font-semibold">Dashboard</h1>

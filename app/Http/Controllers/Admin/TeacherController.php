@@ -12,7 +12,7 @@ class TeacherController extends Controller
 {
     public function index()
     {
-        $teachers = Teacher::with('user')->orderBy('name')->get();
+        $teachers = Teacher::with('user')->orderBy('name')->paginate(10);
 
         return view('admin.teachers.index', compact('teachers'));
     }

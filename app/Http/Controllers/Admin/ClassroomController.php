@@ -17,7 +17,7 @@ class ClassroomController extends Controller
             'grade',
             'academicYear',
             'homeroomTeacher'
-        ])->orderBy('academic_year_id', 'desc')->get();
+        ])->orderBy('academic_year_id', 'desc')->paginate(10);
 
         return view('admin.classrooms.index', compact('classrooms'));
     }

@@ -1,4 +1,13 @@
 <x-layouts.admin>
+    @php
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Master Data'],
+            ['label' => 'Tahun Akademik'],
+        ];
+    @endphp
+    <x-ui.breadcrumbs :items="$breadcrumbs" />
+
     <div class="flex flex-wrap justify-between mb-4">
         <div class="mb-4 md:mb-0">
             <h1 class="text-xl sm:text-2xl font-bold">Tahun Akademik</h1>

@@ -1,4 +1,14 @@
 <x-layouts.admin>
+    @php
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Akademik'],
+            ['label' => 'Roster', 'url' => route('admin.schedules.index')],
+            ['label' => isset($schedule) ? 'Edit' : 'Tambah'],
+        ];
+    @endphp
+    <x-ui.breadcrumbs :items="$breadcrumbs" />
+
     <h1 class="text-xl font-semibold mb-6">
         {{ isset($schedule) ? 'Edit Jadwal' : 'Tambah Jadwal' }}
     </h1>

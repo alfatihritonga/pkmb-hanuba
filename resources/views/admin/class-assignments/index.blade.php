@@ -1,6 +1,15 @@
 <x-layouts.admin>
+    @php
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Akademik'],
+            ['label' => 'Registrasi Kelas'],
+        ];
+    @endphp
+    <x-ui.breadcrumbs :items="$breadcrumbs" />
+
     <h1 class="text-xl font-semibold mb-6">Registrasi Kelas</h1>
-    
+
     @if (session('success'))
     <div class="alert alert-success mb-4">
         {{ session('success') }}

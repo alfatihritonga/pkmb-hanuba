@@ -1,4 +1,12 @@
 <x-layouts.guru>
+    @php
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => route('guru.dashboard')],
+            ['label' => 'Kelas Saya'],
+        ];
+    @endphp
+    <x-ui.breadcrumbs :items="$breadcrumbs" />
+
     <h1 class="text-xl font-semibold mb-2">Kelas yang Diampu</h1>
     <p class="text-sm text-gray-500 mb-6">
         Tahun Akademik {{ $activeYear->year }}

@@ -1,4 +1,12 @@
 <x-layouts.guru>
+    @php
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => route('guru.dashboard')],
+            ['label' => 'Input Nilai'],
+        ];
+    @endphp
+    <x-ui.breadcrumbs :items="$breadcrumbs" />
+
     <h1 class="text-xl font-semibold mb-6">Input Nilai</h1>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
