@@ -3,6 +3,10 @@
     <div
         class="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div class="p-6">
+            <div class="mx-auto rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                <img src="{{ asset('img/logo.png') }}" alt="Logo">
+            </div>
+
             <div class="mb-3">
                 <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">{{ __('Log in to your account') }}</h1>
             </div>

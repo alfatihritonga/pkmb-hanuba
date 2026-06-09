@@ -3,6 +3,10 @@
     <div class="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
         <!-- Sidebar content here -->
         <ul class="menu w-full grow">
+
+            <div class="mx-auto rounded-full w-10 h-10 flex items-center justify-center mb-4">
+                <img src="{{ asset('img/logo.png') }}" alt="Logo">
+            </div>
             
             <li>
                 <a href="{{ route('guru.dashboard') }}" class="{{ Route::is('guru.dashboard') ? 'menu-active' : '' }} is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Dashboard">

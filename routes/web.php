@@ -21,10 +21,17 @@ use App\Http\Controllers\Settings;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+    $authUser = auth()->user();
+    if ($authUser) {
+        if ($authUser->hasRole('admin')) {
+            return redirect()->route('admin.dashboard');
+        } elseif ($authUser->hasRole('guru')) {
+            return redirect()->route('guru.dashboard');
+        }
+    }
 
-// Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    return redirect()->route('login');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('settings/profile', [Settings\ProfileController::class, 'edit'])->name('settings.profile.edit');
