@@ -63,9 +63,9 @@
                     </td>
                     <td>
                         <span class="font-semibold block">
-                            {{ $teacher->birth_place }},
+                            {{ $teacher->birth_place ?? '-' }},
                         </span>
-                        {{ $teacher->birth_date->translatedFormat('d F Y') }}
+                        {{ $teacher->birth_date ? $teacher->birth_date->translatedFormat('d F Y') : '-' }}
                     </td>
                     <td>
                        @if ($teacher->gender === 'L')
