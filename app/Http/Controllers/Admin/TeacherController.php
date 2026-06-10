@@ -44,8 +44,13 @@ class TeacherController extends Controller
                 'user_id' => $user->id,
                 'nip'     => $request->nip,
                 'name'    => $request->name,
+                'birth_place' => $request->birth_place,
+                'birth_date' => $request->birth_date,
+                'religion' => $request->religion,
                 'gender'  => $request->gender,
                 'phone'   => $request->phone,
+                'address'   => $request->address,
+                'status'  => 'active',
             ]);
         });
 
@@ -80,8 +85,13 @@ class TeacherController extends Controller
             $teacher->update([
                 'nip'    => $request->nip,
                 'name'   => $request->name,
+                'birth_place' => $request->birth_place,
+                'birth_date' => $request->birth_date,
+                'religion' => $request->religion,
                 'gender' => $request->gender,
                 'phone'  => $request->phone,
+                'address'  => $request->address,
+                'status' => $request->status,
             ]);
         });
 

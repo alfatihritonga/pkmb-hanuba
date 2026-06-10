@@ -1,13 +1,13 @@
 <x-layouts.admin>
     @php
-        $breadcrumbs = [
-            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
-            ['label' => 'Master Data'],
-            ['label' => 'Guru'],
-        ];
+    $breadcrumbs = [
+    ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+    ['label' => 'Master Data'],
+    ['label' => 'Guru'],
+    ];
     @endphp
     <x-ui.breadcrumbs :items="$breadcrumbs" />
-
+    
     <div class="flex flex-wrap justify-between mb-4">
         <div class="mb-4 md:mb-0">
             <h1 class="text-xl sm:text-2xl font-bold">Guru</h1>
@@ -37,19 +37,56 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>NIP</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th class="w-32">Aksi</th>
+                    <th>NAMA</th>
+                    <th>TEMPAT, TANGGAL LAHIR</th>
+                    <th>JENIS KELAMIN</th>
+                    <th>KONTAK</th>
+                    <th>ALAMAT</th>
+                    <th>STATUS</th>
+                    <th class="w-32">AKSI</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($teachers as $teacher)
                 <tr>
                     <td>{{ $loop->iteration + $teachers->firstItem() - 1 }}</td>
-                    <td>{{ $teacher->nip }}</td>
-                    <td>{{ $teacher->name }}</td>
-                    <td>{{ $teacher->user->email }}</td>
+                    <td>
+                        <span class="block text-xs text-gray-500">
+                            {{ $teacher->nip }}
+                        </span>
+                        <span class="block font-bold">
+                            {{ $teacher->name }}
+                        </span>
+                        <a href="mailto:{{ $teacher->user->email }}" class="text-sm text-blue-500 hover:underline">
+                            {{ $teacher->user->email }}
+                        </a>
+                    </td>
+                    <td>
+                        <span class="font-semibold block">
+                            {{ $teacher->birth_place }},
+                        </span>
+                        {{ $teacher->birth_date->translatedFormat('d F Y') }}
+                    </td>
+                    <td>
+                       @if ($teacher->gender === 'L')
+                           Laki-laki
+                       @else
+                           Perempuan
+                       @endif
+                    </td>
+                    <td>
+                        {{ $teacher->phone ?? '-' }}                       
+                    </td>
+                    <td>
+                        {{ $teacher->address ?? '-' }}
+                    </td>
+                    <td>
+                        @if ($teacher->status === 'active')
+                        <span class="badge badge-success">Aktif</span>
+                        @else
+                        <span class="badge badge-error">Tidak Aktif</span>
+                        @endif
+                    </td>
                     <td>
                         <div class="flex gap-1">
                             <div class="tooltip" data-tip="Edit">
@@ -78,7 +115,7 @@
             </tbody>
         </table>
     </div>
-
+    
     <div class="mt-4">
         {{ $teachers->links() }}
     </div>
