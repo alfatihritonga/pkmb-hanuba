@@ -94,7 +94,7 @@ class ClassroomController extends Controller
     public function destroy(Classroom $classroom)
     {
         if (
-            $classroom->enrollments()->exists() ||
+            $classroom->classAssignments()->exists() ||
             $classroom->schedules()->exists()
         ) {
             return back()->with('error', 'Kelas masih memiliki data akademik');
