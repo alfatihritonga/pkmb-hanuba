@@ -1,69 +1,188 @@
-# Laravel + Blade Starter Kit
+# PKMB Hanuba — Sistem Informasi Akademik
+
+Sistem Informasi Akademik berbasis web untuk **Pusat Kegiatan Belajar Masyarakat (PKBM) Hanuba**. Aplikasi ini dirancang untuk mengelola data akademik secara terpadu, mencakup manajemen siswa, guru, kelas, jadwal pelajaran, nilai, dan absensi.
 
 ---
 
-## Introduction
+## Fitur Utama
 
-Our Laravel 12 + Blade starter kit provides the typical functionality found in the Laravel Starter kits, but with a few key differences:
+### 👤 Manajemen Pengguna
+- Multi-role: **Admin** dan **Guru**
+- Autentikasi bawaan Laravel
 
-- A CoreUI/AdminLTE inspired design layout
-- Blade + AlpineJS code
+### 🎓 Panel Admin
+- **Master Data**: Tingkat kelas, mata pelajaran, tahun akademik
+- **Data Siswa**: Tambah, edit, dan hapus data siswa (NIS & NISN hanya angka)
+- **Data Guru**: Tambah, edit, dan hapus data guru (NIP hanya angka), termasuk pembuatan akun otomatis
+- **Kelas**: Buat dan kelola kelas per tahun akademik
+- **Jadwal Pelajaran**: Atur jadwal mengajar per kelas dan guru
+- **Registrasi Kelas**: Daftarkan siswa ke kelas tertentu
+- **Rekap Nilai**: Pantau kelengkapan nilai per mata pelajaran
+- **Absensi**: Validasi absensi yang diinput oleh guru
 
-This kit aims to fill the gap where there is no simple **Blade only** starter kit available.
-
-Our internal goal at Laravel Daily is to start using this starter kit for our Demo applications, to avoid overwhelming our audience with Vue/Livewire/React if we had used one of the official Laravel 12 starter kits.
-
-**Note:** This is Work in Progress kit, so it will get updates and fixes/features as we go.
-
----
-
-## Screenshots
-
-![](https://laraveldaily.com/uploads/2025/05/LoginPage.png)
-
-![](https://laraveldaily.com/uploads/2025/05/RegisterPage.png)
-
-![](https://laraveldaily.com/uploads/2025/05/DashboardPage.png)
-
-![](https://laraveldaily.com/uploads/2025/05/ProfilePage.png)
+### 🏫 Panel Guru
+- Lihat daftar kelas yang diajar
+- Input dan edit nilai siswa (Tugas, UTS, UAS)
+- Input dan edit absensi siswa per jadwal
+- Rekap nilai mata pelajaran yang diajar
 
 ---
 
-## What is Inside?
+## Tech Stack
 
-Inside you will find all the functions that you would expect:
-
-- Authentication
-    - Login
-    - Registration
-    - Password Reset Flow
-    - Email Confirmation Flow
-- Dashboard Page
-- Profile Settings
-    - Profile Information Page
-    - Password Update Page
-    - Appearance Preferences
+| Layer | Teknologi |
+|---|---|
+| **Backend** | PHP 8.2+, Laravel 12 |
+| **Frontend** | Blade, Alpine.js |
+| **Styling** | Tailwind CSS v4, DaisyUI v5 |
+| **Build Tool** | Vite |
+| **Database** | MySQL / SQLite |
+| **Testing** | Pest PHP |
 
 ---
 
-## How to use it?
+## Prasyarat
 
-To use this kit, you can install it using:
+Pastikan sistem Anda sudah terpasang:
+
+- PHP **>= 8.2**
+- Composer
+- Node.js & NPM
+- MySQL (atau SQLite untuk pengembangan lokal)
+
+---
+
+## Instalasi & Setup
+
+### 1. Clone Repository
 
 ```bash
-laravel new --using=laraveldaily/starter-kit
+git clone https://github.com/alfatihritonga/pkmb-hanuba.git
+cd pkmb-hanuba
 ```
 
-From there, you can modify the kit to your needs.
+### 2. Install Dependensi PHP
+
+```bash
+composer install
+```
+
+### 3. Install Dependensi Node.js
+
+```bash
+npm install
+```
+
+### 4. Konfigurasi Environment
+
+Salin file `.env.example` menjadi `.env`:
+
+```bash
+cp .env.example .env
+```
+
+Kemudian generate application key:
+
+```bash
+php artisan key:generate
+```
+
+### 5. Konfigurasi Database
+
+Buka file `.env` dan sesuaikan konfigurasi database:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=pkmb_hanuba
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+> **Catatan:** Untuk pengembangan lokal, Anda juga bisa menggunakan SQLite dengan mengubah `DB_CONNECTION=sqlite`.
+
+### 6. Migrasi & Seeding Database
+
+Jalankan migrasi untuk membuat semua tabel:
+
+```bash
+php artisan migrate
+```
+
+Isi database dengan data awal (opsional, untuk testing):
+
+```bash
+php artisan db:seed
+```
+
+Seeder akan membuat data berikut secara otomatis:
+- Akun admin & guru default
+- Tahun akademik, tingkat kelas, dan mata pelajaran
+- Data siswa dan guru contoh
+- Kelas, jadwal, dan registrasi siswa contoh
+
+### 7. Build Aset Frontend
+
+Untuk pengembangan (dengan hot-reload):
+
+```bash
+npm run dev
+```
+
+Untuk produksi:
+
+```bash
+npm run build
+```
+
+### 8. Jalankan Aplikasi
+
+```bash
+php artisan serve
+```
+
+Aplikasi akan berjalan di `http://localhost:8000`.
 
 ---
 
-## Design Elements
+## Akun Default
 
-If you want to see examples of what design elements we have, you can [visit the Wiki](<https://github.com/LaravelDaily/starter-kit/wiki/Design-Examples-(Raw-Files)>) and see the raw HTML files.
+Setelah menjalankan seeder, gunakan akun berikut untuk login:
+
+| Role | Email | Password |
+|---|---|---|
+| Admin | `admin@example.com` | `password` |
+| Guru | `guru@example.com` | `password` |
+
+> **Penting:** Segera ganti password default setelah login pertama kali di lingkungan produksi.
 
 ---
 
-## Licence
+## Menjalankan Semua Sekaligus (Dev Mode)
 
-Starter kit is open-sourced software licensed under the MIT license.
+Anda bisa menjalankan server PHP, queue worker, dan Vite secara bersamaan dengan satu perintah:
+
+```bash
+composer run dev
+```
+
+---
+
+## Struktur Direktori Utama
+
+```
+app/
+├── Http/Controllers/
+│   ├── Admin/      # Controller untuk panel admin
+│   └── Guru/       # Controller untuk panel guru
+├── Models/         # Eloquent models (Student, Teacher, Classroom, dll.)
+database/
+├── migrations/     # Skema tabel database
+├── seeders/        # Data awal untuk testing
+resources/
+└── views/
+    ├── admin/      # Tampilan panel admin
+    └── guru/       # Tampilan panel guru
+```
+
