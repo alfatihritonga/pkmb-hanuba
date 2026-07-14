@@ -6,7 +6,7 @@
     
     <div class="flex flex-col gap-2">
         <label for="nip" class="text-sm font-semibold">NIP</label>
-        <input type="text" name="nip" value="{{ old('nip', $teacher->nip ?? '') }}" class="input w-full bg-base-200" required>
+        <input type="text" name="nip" value="{{ old('nip', $teacher->nip ?? '') }}" class="input w-full bg-base-200" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
     </div>
     
     <div class="flex flex-col gap-2">

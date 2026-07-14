@@ -26,7 +26,7 @@ class TeacherController extends Controller
     {
         $request->validate([
             'name'   => 'required',
-            'nip'    => 'required|unique:teachers,nip',
+            'nip'    => 'required|regex:/^[0-9]+$/|unique:teachers,nip',
             'gender' => 'required|in:L,P',
             'email'  => 'required|email|unique:users,email',
         ]);
@@ -70,7 +70,7 @@ class TeacherController extends Controller
     {
         $request->validate([
             'name'   => 'required',
-            'nip'    => 'required|unique:teachers,nip,' . $teacher->id,
+            'nip'    => 'required|regex:/^[0-9]+$/|unique:teachers,nip,' . $teacher->id,
             'gender' => 'required|in:L,P',
             'email'  => 'required|email|unique:users,email,' . $teacher->user_id,
         ]);

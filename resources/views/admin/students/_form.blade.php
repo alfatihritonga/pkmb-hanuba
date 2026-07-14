@@ -14,6 +14,8 @@
                name="nis"
                value="{{ old('nis', $student->nis ?? '') }}"
                class="input input-bordered w-full"
+               inputmode="numeric"
+               oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                required>
     </div>
 
@@ -23,6 +25,8 @@
                name="nisn"
                value="{{ old('nisn', $student->nisn ?? '') }}"
                class="input input-bordered w-full"
+               inputmode="numeric"
+               oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                required>
     </div>
 

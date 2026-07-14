@@ -41,8 +41,8 @@ class StudentController extends Controller
     {
         $request->validate([
             'name'  => 'required',
-            'nis'   => 'required|unique:students,nis',
-            'nisn'  => 'required|unique:students,nisn',
+            'nis'   => 'required|regex:/^[0-9]+$/|unique:students,nis',
+            'nisn'  => 'required|regex:/^[0-9]+$/|unique:students,nisn',
             'gender'=> 'required|in:L,P',
         ]);
 
@@ -69,8 +69,8 @@ class StudentController extends Controller
     {
         $request->validate([
             'name'  => 'required',
-            'nis'   => 'required|unique:students,nis,' . $student->id,
-            'nisn'  => 'required|unique:students,nisn,' . $student->id,
+            'nis'   => 'required|regex:/^[0-9]+$/|unique:students,nis,' . $student->id,
+            'nisn'  => 'required|regex:/^[0-9]+$/|unique:students,nisn,' . $student->id,
             'gender'=> 'required|in:L,P',
         ]);
 
@@ -91,7 +91,7 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         if (
-            $student->enrollments()->exists() ||
+            $student->classAssignments()->exists() ||
             $student->scores()->exists()
         ) {
             return back()->with('error', 'Siswa masih memiliki data akademik');
