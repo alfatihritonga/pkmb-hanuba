@@ -6,5 +6,5 @@
 @source "../../storage/framework/views/*.php";
 
 @plugin "daisyui" {
-  themes: dark --prefersdark, black, bumblebee, halloween;
+  themes: dark --prefersdark, black, winter, night;
 }

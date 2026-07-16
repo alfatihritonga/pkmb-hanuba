@@ -8,8 +8,8 @@
     <script>
         (function () {
             const THEMES = {
-                light: 'bumblebee',
-                dark: 'halloween',
+                light: 'winter',
+                dark: 'night',
             }
             
             function applyTheme(theme) {

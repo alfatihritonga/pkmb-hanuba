@@ -7,7 +7,8 @@
         </svg>
     </label>
     
-    <div class="flex-1">
+    <div class="flex-1 px-4">
+        <h1 class="text-lg font-semibold">Sistem Administrasi PKBM Hanuba</h1>
     </div>
     
     <div class="flex items-center gap-2">

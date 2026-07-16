@@ -8,8 +8,8 @@
     <script>
         (function () {
             const THEMES = {
-                light: 'bumblebee',
-                dark: 'halloween',
+                light: 'winter',
+                dark: 'night',
             }
             
             function applyTheme(theme) {
@@ -61,8 +61,7 @@
 <body class="bg-base-100 text-base-content">
     
     <div class="drawer lg:drawer-open">
-        
-        <input id="sidebar-toggle" type="checkbox" class="drawer-toggle" />
+        <input id="sidebar-toggle" type="checkbox" class="drawer-toggle" checked />
         
         <div class="drawer-content">
             
